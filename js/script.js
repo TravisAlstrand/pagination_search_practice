@@ -6,6 +6,21 @@ const searchInput = document.querySelector("#authorSearch");
 // console.log(authors);
 const authorsPerPage = 3;
 
+/* ENTER YOUR CODE HERE */
+
+// 1. Create an event listener on the searchInput to listen for keyboard input.
+// 2. Inside, create a variable storing an empty array for the soon-to-be filtered authors.
+// 3. Create a variable to store the string the user has typed.
+//    Hint: toLowerCase()
+// 4-a. Start a loop to the length of `authors`.
+// 4-b. Inside, create a variable to store the current `authors` name.
+//      Hint: toLowerCase()
+// 4-c. Create a conditional to check if the author's name includes the user's input.
+//      Hint: includes()
+// 4-d. If true, push the current author object into the new array created above.
+// 5. Call the handlePagination() function passing it this new array.
+// 6. Call the showPage() function passing it this new array and the number 1.
+// 7. Call the handleActiveClass() function and pass it `null` to default to the first button.
 searchInput.addEventListener("keyup", () => {
   const newData = [];
   const userInput = searchInput.value.toLowerCase();
@@ -23,14 +38,16 @@ searchInput.addEventListener("keyup", () => {
   handleActiveClass(null);
 });
 
+/* DON'T CHANGE THE CODE BELOW */
+
 /* This function handles calculating how many buttons are
 needed and dynamically add them to the page */
 
 function handlePagination(array) {
-  const numberOfPages = Math.ceil(array.length / authorsPerPage);
-  paginationList.innerHTML = "";
+  const numberOfButtons = Math.ceil(array.length / authorsPerPage);
+  paginationList.innerHTML = ""; // SHOULD THIS BE ADDRESSED ?!
 
-  for (let i = 1; i <= numberOfPages; i++) {
+  for (let i = 1; i <= numberOfButtons; i++) {
     const html = `
       <li>
         <button>${i}</button>
