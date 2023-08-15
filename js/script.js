@@ -1,15 +1,34 @@
 // ELEMENT SELECTORS
 const authorContainer = document.querySelector("#authorContainer");
 const paginationList = document.querySelector("#paginationList");
+const searchInput = document.querySelector("#authorSearch");
 
 // console.log(authors);
 const authorsPerPage = 3;
 
-/* This function will handle calculating how many buttons are
+searchInput.addEventListener("keyup", () => {
+  const newData = [];
+  const userInput = searchInput.value.toLowerCase();
+
+  for (i = 0; i < authors.length; i++) {
+    const authorName = authors[i].name.toLowerCase();
+
+    if (authorName.includes(userInput)) {
+      newData.push(authors[i]);
+    }
+  }
+
+  handlePagination(newData);
+  showPage(newData, 1);
+  handleActiveClass(null);
+});
+
+/* This function handles calculating how many buttons are
 needed and dynamically add them to the page */
 
 function handlePagination(array) {
   const numberOfPages = Math.ceil(array.length / authorsPerPage);
+  paginationList.innerHTML = "";
 
   for (let i = 1; i <= numberOfPages; i++) {
     const html = `
@@ -21,7 +40,7 @@ function handlePagination(array) {
   }
 }
 
-/* This function will handle calculating how many and which
+/* This function handles calculating how many and which
 authors to show on the current page and dynamically add them */
 
 function showPage(array, page) {
@@ -48,7 +67,7 @@ function showPage(array, page) {
   }
 }
 
-/* This function will handle adding and removing
+/* This function handles adding and removing
 the active class from the correct buttons */
 
 function handleActiveClass(button) {
@@ -62,7 +81,7 @@ function handleActiveClass(button) {
   }
 }
 
-/* This event listener will handle calling our
+/* This event listener handles calling our
 functions above to change the page & active button  */
 
 paginationList.addEventListener("click", (e) => {
