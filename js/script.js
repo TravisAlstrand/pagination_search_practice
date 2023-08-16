@@ -23,7 +23,7 @@ const authorsPerPage = 3;
 searchInput.addEventListener("keyup", () => {
   const newData = [];
   const userInput = searchInput.value.toLowerCase();
-
+  console.log(userInput);
   for (i = 0; i < authors.length; i++) {
     const authorName = authors[i].name.toLowerCase();
 
@@ -53,6 +53,7 @@ function handlePagination(array) {
     `;
     paginationList.insertAdjacentHTML("beforeend", html);
   }
+  paginationList.querySelector("button").classList.add("active");
 }
 
 /* This function handles calculating how many and which
@@ -68,11 +69,11 @@ function showPage(array, page) {
       const html = `
         <div class="author-card">
           <div class="card-header">
-            <img src="${authors[i].image}" alt="photo of ${authors[i].name}" />
+            <img src="${array[i].image}" alt="photo of ${array[i].name}" />
           </div>
           <div class="card-content">
-            <h2 class="title">${authors[i].name}</h2>
-            <p>${authors[i].text}</p>
+            <h2 class="title">${array[i].name}</h2>
+            <p>${array[i].text}</p>
           </div>
         </div>
       `;
@@ -103,4 +104,3 @@ paginationList.addEventListener("click", (e) => {
 
 handlePagination(authors);
 showPage(authors, 1);
-paginationList.querySelector("button").classList.add("active");
