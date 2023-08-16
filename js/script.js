@@ -20,7 +20,6 @@ const authorsPerPage = 3;
 // 4-d. If true, push the current author object into the new array created above.
 // 5. Call the handlePagination() function passing it this new array.
 // 6. Call the showPage() function passing it this new array and the number 1.
-// 7. Call the handleActiveClass() function and pass it `null` to default to the first button.
 searchInput.addEventListener("keyup", () => {
   const newData = [];
   const userInput = searchInput.value.toLowerCase();
@@ -35,7 +34,6 @@ searchInput.addEventListener("keyup", () => {
 
   handlePagination(newData);
   showPage(newData, 1);
-  handleActiveClass(null);
 });
 
 /* DON'T CHANGE THE CODE BELOW */
@@ -84,29 +82,20 @@ function showPage(array, page) {
   }
 }
 
-/* This function handles adding and removing
-the active class from the correct buttons */
-
-function handleActiveClass(button) {
-  if (!button) {
-    button = document.querySelector("button");
-    button.classList.add("active");
-  } else {
-    const activeButton = document.querySelector(".active");
-    activeButton.classList.remove("active");
-    button.classList.add("active");
-  }
-}
-
-/* This event listener handles calling our
-functions above to change the page & active button  */
+/* This event listener handles calling our function
+above to change the page & add the `active` class  */
 
 paginationList.addEventListener("click", (e) => {
+  const activeButton = paginationList.querySelector(".active");
   const buttonClicked = e.target.closest("button");
 
+  if (activeButton && buttonClicked) {
+    activeButton.classList.remove("active");
+  }
+
   if (buttonClicked) {
+    buttonClicked.classList.add("active");
     showPage(authors, buttonClicked.innerHTML);
-    handleActiveClass(buttonClicked);
   }
 });
 
@@ -114,4 +103,4 @@ paginationList.addEventListener("click", (e) => {
 
 handlePagination(authors);
 showPage(authors, 1);
-handleActiveClass(null);
+paginationList.querySelector("button").classList.add("active");
