@@ -18,12 +18,17 @@ const authorsPerPage = 3;
 // 4-c. Create a conditional to check if the author's name includes the user's input.
 //      Hint: includes()
 // 4-d. If true, push the current author object into the new array created above.
-// 5. Call the handlePagination() function passing it this new array.
-// 6. Call the showPage() function passing it this new array and the number 1.
+// 5-a. Create a conditional to check if the length of the new array is greater than zero.
+// 5-b. If true,
+//      - Call the handlePagination() function passing it this new array.
+//      - Call the showPage() function passing it this new array and the number 1.
+// 5-c. If false,
+//      - Set the authorContainer's innerHTML to an <h3> saying no results were found.
+//      - Set the paginationList's innerHTML to an empty string.
 searchInput.addEventListener("keyup", () => {
   const newData = [];
   const userInput = searchInput.value.toLowerCase();
-  console.log(userInput);
+
   for (i = 0; i < authors.length; i++) {
     const authorName = authors[i].name.toLowerCase();
 
@@ -32,8 +37,16 @@ searchInput.addEventListener("keyup", () => {
     }
   }
 
-  handlePagination(newData);
-  showPage(newData, 1);
+  if (newData.length > 0) {
+    handlePagination(newData);
+    showPage(newData, 1);
+  } else {
+    const html = `
+      <h3>No Results Found...</h3>
+    `;
+    authorContainer.innerHTML = html;
+    paginationList.innerHTML = "";
+  }
 });
 
 /* DON'T CHANGE THE CODE BELOW */
@@ -43,7 +56,7 @@ needed and dynamically add them to the page */
 
 function handlePagination(array) {
   const numberOfButtons = Math.ceil(array.length / authorsPerPage);
-  paginationList.innerHTML = ""; // SHOULD THIS BE ADDRESSED ?!
+  paginationList.innerHTML = "";
 
   for (let i = 1; i <= numberOfButtons; i++) {
     const html = `

@@ -81,6 +81,11 @@ h1 {
   color: #f5f5f5;
 }
 
+h3 {
+  text-align: center;
+  margin: 2rem auto;
+}
+
 .input-container {
   position: relative;
   max-width: 425px;
@@ -118,7 +123,6 @@ body .wrapper {
   background-color: #f5f5f5;
   border-radius: 1rem;
   flex: 1 0 300px;
-  animation: 0.7s fadeIn;
   transition: transform 0.4s ease-out;
 }
 
@@ -175,6 +179,10 @@ body .wrapper {
     padding: 1rem 2rem;
   }
 
+  h3 {
+    margin-block: 0;
+  }
+
   .author-container {
     margin-top: 11rem;
     padding: 2rem;
@@ -188,16 +196,5 @@ body .wrapper {
 @media (min-width: 700px) {
   .author-container {
     margin-top: 9rem;
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateX(-100px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0px);
   }
 }
