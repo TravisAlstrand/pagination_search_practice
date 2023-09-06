@@ -67,6 +67,23 @@ function handlePagination(array) {
     paginationList.insertAdjacentHTML("beforeend", html);
   }
   paginationList.querySelector("button").classList.add("active");
+
+  /* This event listener handles calling our function
+  below to change the page & add the `active` class  */
+
+  paginationList.addEventListener("click", (e) => {
+    const activeButton = paginationList.querySelector(".active");
+    const buttonClicked = e.target.closest("button");
+
+    if (activeButton && buttonClicked) {
+      activeButton.classList.remove("active");
+    }
+
+    if (buttonClicked) {
+      buttonClicked.classList.add("active");
+      showPage(array, buttonClicked.innerHTML);
+    }
+  });
 }
 
 /* This function handles calculating how many and which
@@ -95,23 +112,6 @@ function showPage(array, page) {
     }
   }
 }
-
-/* This event listener handles calling our function
-above to change the page & add the `active` class  */
-
-paginationList.addEventListener("click", (e) => {
-  const activeButton = paginationList.querySelector(".active");
-  const buttonClicked = e.target.closest("button");
-
-  if (activeButton && buttonClicked) {
-    activeButton.classList.remove("active");
-  }
-
-  if (buttonClicked) {
-    buttonClicked.classList.add("active");
-    showPage(authors, buttonClicked.innerHTML);
-  }
-});
 
 /* These function calls are needed to initialize the page */
 
